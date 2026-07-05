@@ -9,6 +9,8 @@ class Solution:
         self.k=k
         self.ans=None
         def find(root):
+            if self.ans is not None:
+                return
             if root.left:
                 find(root.left)
             if self.k==1:
