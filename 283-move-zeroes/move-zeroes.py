@@ -7,11 +7,15 @@ class Solution:
         n=len(nums)
         while i<n:
             if nums[i]==0:
+                flag=False
                 j=i
                 while j<n and nums[j]==0:
                     j+=1
                 if j<n:
                     nums[i],nums[j]=nums[j],nums[i]
+                    flag=True
+                if not flag:
+                    break
             i+=1
-            
+
         
