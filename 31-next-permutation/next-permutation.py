@@ -3,14 +3,11 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        # Brute force would be to generate all possible permutations and then finding the required one.
+
         if len(nums)==1:
             return
-        if len(nums)==2:
-            if nums[0]>nums[1]:
-                nums.sort()
-            else:
-                nums[0],nums[1]=nums[1],nums[0]
-            return
+        
 
         n=len(nums)
         idx=n-2
