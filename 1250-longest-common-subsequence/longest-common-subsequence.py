@@ -14,12 +14,25 @@ class Solution:
         #     return dp[i][j]
         # return solve(0,0)
 
-        dp=[[0]*(l2+1) for _ in range(l1+1)]
+        # dp=[[0]*(l2+1) for _ in range(l1+1)]
+        # for i in range(l1-1,-1,-1):
+        #     for j in range(l2-1,-1,-1):
+        #         if text1[i]==text2[j]:
+        #             dp[i][j]= 1+dp[i+1][j+1]
+        #         else:
+        #             dp[i][j]= max(dp[i][j+1],dp[i+1][j])
+        # return dp[0][0]
+
+
+
+        forw=[0]*(l2+1)
         for i in range(l1-1,-1,-1):
+            curr=[0]*(l2+1)
             for j in range(l2-1,-1,-1):
                 if text1[i]==text2[j]:
-                    dp[i][j]= 1+dp[i+1][j+1]
+                    curr[j]= 1+forw[j+1]
                 else:
-                    dp[i][j]= max(dp[i][j+1],dp[i+1][j])
-        return dp[0][0]
+                    curr[j]= max(curr[j+1],forw[j])
+            forw=curr
+        return forw[0]
         
