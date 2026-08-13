@@ -19,17 +19,25 @@ class Solution:
         #     return dp[i][flag]
         # return solve(0,1)
 
-        dp=[-1]*n
-        def solve(i):
-            if i>=n:
-                return 0
-            if dp[i]!=-1:
-                return dp[i]
-            want=nums[i]+solve(i+2)
-            not_want=solve(i+1)
+        # dp=[-1]*n
+        # def solve(i):
+        #     if i>=n:
+        #         return 0
+        #     if dp[i]!=-1:
+        #         return dp[i]
+        #     want=nums[i]+solve(i+2)
+        #     not_want=solve(i+1)
+        #     dp[i]=max(want,not_want)
+        #     return dp[i]
+        # return solve(0)
+
+        dp=[-1]*(n+2)
+        dp[-1],dp[-2]=0,0
+        for i in range(n-1,-1,-1):
+            want=nums[i]+dp[i+2]
+            not_want=dp[i+1]
             dp[i]=max(want,not_want)
-            return dp[i]
-        return solve(0)
+        return dp[0]
 
         # We can also solve this using 1D dp.
         
