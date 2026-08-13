@@ -31,13 +31,22 @@ class Solution:
         #     return dp[i]
         # return solve(0)
 
-        dp=[-1]*(n+2)
-        dp[-1],dp[-2]=0,0
+        # dp=[-1]*(n+2)
+        # dp[-1],dp[-2]=0,0
+        # for i in range(n-1,-1,-1):
+        #     want=nums[i]+dp[i+2]
+        #     not_want=dp[i+1]
+        #     dp[i]=max(want,not_want)
+        # return dp[0]
+
+        forw1,forw2=0,0
         for i in range(n-1,-1,-1):
-            want=nums[i]+dp[i+2]
-            not_want=dp[i+1]
-            dp[i]=max(want,not_want)
-        return dp[0]
+            want=nums[i]+forw2
+            not_want=forw1
+            curr=max(want,not_want)
+            forw2=forw1
+            forw1=curr
+        return forw1
 
         # We can also solve this using 1D dp.
         
