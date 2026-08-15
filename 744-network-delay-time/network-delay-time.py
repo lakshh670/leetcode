@@ -11,7 +11,10 @@ class Solution:
         
         while q:
             dis,node=heapq.heappop(q)
+            if dis>dist[node]:
+                continue
             for neigh,wt in adj[node]:
+
                 
                 if dis+wt<dist[neigh]:
                     
