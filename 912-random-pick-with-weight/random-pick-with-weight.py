@@ -16,9 +16,15 @@ class Solution:
 
     def pickIndex(self) -> int:
         x=random.random()
-        for index,value in enumerate(self.range):
-            if value[0]<=x<=value[1]:
-                return index
+        l,r=0,len(self.range)
+        while l<r:
+            mid=l+(r-l)//2
+            if self.range[mid][0]<=x<=self.range[mid][1]:
+                return mid
+            elif x>self.range[mid][1]:
+                l=mid+1
+            else:
+                r=mid
 
 
 # Your Solution object will be instantiated and called as such:
