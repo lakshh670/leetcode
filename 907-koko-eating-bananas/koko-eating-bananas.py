@@ -1,20 +1,18 @@
-import math
 class Solution:
-    def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        left,right=1,max(piles)
-
-        def check(num):
-            s=0
-           
+    def minEatingSpeed(self, piles: list[int], h: int) -> int:
+        def check(k):
+            count=0
             for x in piles:
-                s+=math.ceil(x/num)
-            return True if s<=h else False
-
-        while left<right:
-            mid=left+(right-left)//2
+                count+=1+(x-1)//k
+            return count<=h
+        maxi,mini=sum(piles),1
+        res=maxi
+        while mini<=maxi:
+            mid=mini+(maxi-mini)//2
             if check(mid):
-                right=mid
+                res=mid
+                maxi=mid-1
             else:
-                left=mid+1
-        return left
+                mini=mid+1
+        return res
         
