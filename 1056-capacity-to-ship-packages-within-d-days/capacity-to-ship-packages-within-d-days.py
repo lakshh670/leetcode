@@ -1,21 +1,23 @@
 class Solution:
-    def shipWithinDays(self, weights: List[int], days: int) -> int:
-        left,right=max(weights),sum(weights)
-        def check(wt):
-            num_days=0
+    def shipWithinDays(self, weights: list[int], days: int) -> int:
+        def check(k_cap):
+            count=0
             s=0
-            for i in range(len(weights)-1):
-                s+=weights[i]
-                if s>wt-weights[i+1]:
-                    num_days+=1
+            for x in weights:
+                if x>k_cap:
+                    return False
+                if s+x>k_cap:
+                    count+=1
                     s=0
-            num_days+=1
-            return num_days<=days
-        while left<right:
+                s+=x
+            return count+1<=days
+        left,right=min(weights),sum(weights)
+        res=right
+        while left<=right:
             mid=left+(right-left)//2
-            print(left,right)
             if check(mid):
-                right=mid
+                res=mid
+                right=mid-1
             else:
                 left=mid+1
-        return left
+        return res
