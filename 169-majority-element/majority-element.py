@@ -14,6 +14,7 @@ class Solution:
             else:
                 if not cnt:
                     elem=x
+                    cnt+=1
                 else:
                     cnt-=1
 
