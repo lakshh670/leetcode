@@ -1,15 +1,18 @@
 class Solution:
-    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        # Most optimal: Monotonic stack
+    def dailyTemperatures(self, temperatures: list[int]) -> list[int]:
         n=len(temperatures)
-        res=[0]*n
+        next_greater=[-1]*n
         st=[]
-        for i,x in enumerate(temperatures[::-1]):
-            while st and st[-1][0]<=x:
+        for i in range(n-1,-1,-1):
+            while st and temperatures[st[-1]]<=temperatures[i]:
                 st.pop()
-            res[n-1-i]=st[-1][1]-(n-1-i) if st else 0
-            st.append([x,n-1-i])
+            if st:
+                next_greater[i]=st[-1]
+            st.append(i)
+        res=[0]*n
+        for i in range(n):
+            if next_greater[i]!=-1:
+                res[i]=next_greater[i]-i
         return res
-
 
         
