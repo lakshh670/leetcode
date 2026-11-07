@@ -1,17 +1,36 @@
+# Brute force
+# class MedianFinder:
+
+#     def __init__(self):
+#         self.arr=[]
+
+#     def addNum(self, num: int) -> None:
+#         self.arr.append(num)
+
+#     def findMedian(self) -> float:
+#         self.arr.sort()
+#         n=len(self.arr)
+#         if n%2!=0:
+#             return self.arr[n//2]
+#         return (self.arr[n//2-1]+self.arr[n//2])/2
+
+
 class MedianFinder:
 
     def __init__(self):
-        self.arr=[]
+        self.lo,self.hi=[],[]
 
     def addNum(self, num: int) -> None:
-        self.arr.append(num)
+        heapq.heappush(self.lo,-num)
+        heapq.heappush(self.hi,-heapq.heappop(self.lo))
+        if len(self.hi)>len(self.lo):
+            heapq.heappush(self.lo,-heapq.heappop(self.hi))
+
 
     def findMedian(self) -> float:
-        self.arr.sort()
-        n=len(self.arr)
-        if n%2!=0:
-            return self.arr[n//2]
-        return (self.arr[n//2-1]+self.arr[n//2])/2
+        if len(self.lo)>len(self.hi):
+            return -self.lo[0]
+        return (self.hi[0]-self.lo[0])/2
 
 
 # Your MedianFinder object will be instantiated and called as such:
